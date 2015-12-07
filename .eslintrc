@@ -1,0 +1,7 @@
+{
+  "extends": "ember",
+  "parser": "babel-eslint",
+  "rules": {
+    "prefer-arrow-callback": 0
+  }
+}
