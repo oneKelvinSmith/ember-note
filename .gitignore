@@ -16,3 +16,4 @@
 npm-debug.log
 testem.log
 */**/.tern-port
+.tern-port
