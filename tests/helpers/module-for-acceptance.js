@@ -1,4 +1,4 @@
-import { module } from 'qunit';
+import {module} from 'qunit';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 
@@ -8,7 +8,7 @@ export default function(name, options = {}) {
       this.application = startApp();
 
       if (options.beforeEach) {
-        options.beforeEach.apply(this, arguments);
+        Reflect.apply(options.beforeEach, this, arguments);
       }
     },
 
@@ -16,7 +16,7 @@ export default function(name, options = {}) {
       destroyApp(this.application);
 
       if (options.afterEach) {
-        options.afterEach.apply(this, arguments);
+        Reflect.apply(options.afterEach, this, arguments);
       }
     }
   });
