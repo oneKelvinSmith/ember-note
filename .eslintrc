@@ -2,6 +2,9 @@
   "extends": "ember",
   "parser": "babel-eslint",
   "rules": {
-    "prefer-arrow-callback": 0
+    "arrow-spacing": 2,
+    "prefer-arrow-callback": 2,
+    "space-before-function-paren": [2, "never"],
+    "no-restricted-syntax": [2, "WithStatement"]
   }
 }
