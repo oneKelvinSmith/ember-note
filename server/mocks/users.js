@@ -3,14 +3,19 @@ module.exports = function(app) {
   var usersRouter = express.Router();
   var bodyParser = require('body-parser');
   var nedb = require('nedb');
-  var userDB = new nedb({ fileName: 'users', autoload: true });
+  var userDB = new nedb({
+    fileName: 'users',
+    autoload: true
+  });
 
   app.use(bodyParser.json());
 
   usersRouter.post('/', function(req, res) {
     userDB
       .find({})
-      .sort({ id: -1 })
+      .sort({
+        id: -1
+      })
       .limit(1)
       .exec(function(err, users) {
         if (users.length !== 0) {
@@ -20,16 +25,22 @@ module.exports = function(app) {
 
           userDB.insert(req.body.user, (_err, newUser) => {
             res.status(201);
-            res.send(JSON.stringify({ user: newUser }));
+            res.send(JSON.stringify({
+              user: newUser
+            }));
           });
         }
       });
   });
 
   usersRouter.get('/', function(req, res) {
-    res.send({
-      users: []
-    });
+    userDB
+      .find(req.query)
+      .exec(function(err, users) {
+        res.send({
+          users: users
+        });
+      });
   });
 
   usersRouter.get('/:id', function(req, res) {
