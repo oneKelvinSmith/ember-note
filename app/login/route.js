@@ -12,7 +12,7 @@ export default Ember.Route.extend({
             const user = users.objectAt(0);
 
             this.controllerFor('application').set('user', user);
-            this.transitionTo('notebooks');
+            this.transitionTo('notebooks', user.get('id'));
           } else {
             console.log('unexpected query result');
           }
@@ -20,4 +20,3 @@ export default Ember.Route.extend({
     }
   }
 });
-

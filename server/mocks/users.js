@@ -1,4 +1,3 @@
-/* jshint node:true */
 module.exports = function(app) {
   var express = require('express');
   var usersRouter = express.Router();
@@ -10,6 +9,16 @@ module.exports = function(app) {
   });
 
   app.use(bodyParser.json());
+
+  usersRouter.get('/', function(req, res) {
+    userDB
+      .find(req.query)
+      .exec(function(err, users) {
+        res.send({
+          users: users
+        });
+      });
+  });
 
   usersRouter.post('/', function(req, res) {
     userDB
@@ -23,23 +32,13 @@ module.exports = function(app) {
           req.body.user.id = users[0].id + 1;
         } else {
           req.body.user.id = 1;
-
-          userDB.insert(req.body.user, function(_err, newUser) {
-            res.status(201);
-            res.send(JSON.stringify({
-              user: newUser
-            }));
-          });
         }
-      });
-  });
 
-  usersRouter.get('/', function(req, res) {
-    userDB
-      .find(req.query)
-      .exec(function(err, users) {
-        res.send({
-          users: users
+        userDB.insert(req.body.user, function(_err, newUser) {
+          res.status(201);
+          res.send(JSON.stringify({
+            user: newUser
+          }));
         });
       });
   });
