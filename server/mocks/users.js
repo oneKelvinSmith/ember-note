@@ -1,3 +1,4 @@
+/* jshint node:true */
 module.exports = function(app) {
   var express = require('express');
   var usersRouter = express.Router();
@@ -23,7 +24,7 @@ module.exports = function(app) {
         } else {
           req.body.user.id = 1;
 
-          userDB.insert(req.body.user, (_err, newUser) => {
+          userDB.insert(req.body.user, function(_err, newUser) {
             res.status(201);
             res.send(JSON.stringify({
               user: newUser
