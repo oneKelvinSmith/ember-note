@@ -11,7 +11,9 @@ Router.map(function() {
   this.route('notebooks', {
     path: 'notebooks/:user_id'
   }, function() {
-    this.route('notes');
+    this.route('notes', function() {
+      this.route('note');
+    });
   });
 });
 
