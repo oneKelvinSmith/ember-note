@@ -6,6 +6,7 @@ moduleFor('route:notebooks', 'Unit | Route | notebooks', {
 });
 
 test('it exists', function(assert) {
-  let route = this.subject();
+  const route = this.subject();
+
   assert.ok(route);
 });
